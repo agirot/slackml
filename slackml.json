@@ -1,0 +1,27 @@
+{
+  "mailing": [
+    {
+      "ID": "users@trafficserver.apache.org",
+      "TitleFilters": [
+        "[ANNOUNCE]"
+      ],
+      "InitCount": 1
+    },
+    {
+      "ID": "users@trafficcontrol.apache.org",
+      "TitleFilters": [
+        "[ANNOUNCE]",
+        "CVE-"
+      ],
+      "InitCount": 1
+    },
+    {
+      "ID": "haproxy@formilux.org",
+      "TitleFilters": [
+        "[ANNOUNCE]",
+        "stable-bot:"
+      ],
+      "InitCount": 1
+    }
+  ]
+}
