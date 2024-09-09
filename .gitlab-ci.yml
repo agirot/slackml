@@ -1,0 +1,22 @@
+stages:
+  - cron
+
+run-job:
+  stage: cron
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  tags:
+    - docker
+  image: golang:latest
+  before_script:
+    - apt-get update && apt-get install -y curl jq
+    - PROJECT_API=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}
+  script:
+    - echo $PROJECT_API
+    - |
+      curl --location --header "PRIVATE-TOKEN: $CICD_BOT_TOKEN" "$PROJECT_API/jobs/artifacts/init/raw/cache.json?job=run-job" -o cache.json
+    - ML_SLACK_CHANNEL_ID=$ML_SLACK_CHANNEL_ID ML_SLACK_TOKEN=$ML_SLACK_TOKEN go run ./...
+    - echo "completed!"
+  artifacts:
+    paths:
+      - cache.json
