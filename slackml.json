@@ -1,14 +1,14 @@
 {
   "mailing": [
     {
-      "ID": "users@trafficserver.apache.org",
+      "ID": "https://www.mail-archive.com/users@trafficserver.apache.org/maillist.xml",
       "TitleFilters": [
         "[ANNOUNCE]"
       ],
       "InitCount": 1
     },
     {
-      "ID": "users@trafficcontrol.apache.org",
+      "ID": "https://www.mail-archive.com/users@trafficcontrol.apache.org/maillist.xml",
       "TitleFilters": [
         "[ANNOUNCE]",
         "CVE-"
@@ -16,11 +16,19 @@
       "InitCount": 1
     },
     {
-      "ID": "haproxy@formilux.org",
+      "ID": "https://www.mail-archive.com/haproxy@formilux.org/maillist.xml",
       "TitleFilters": [
         "[ANNOUNCE]",
         "stable-bot:"
       ],
+      "InitCount": 1
+    },
+    {
+      "ID": "https://cilium.io/newsletter/rss.xml",
+      "InitCount": 1
+    },
+    {
+      "ID": "https://blog.cloudflare.com/rss",
       "InitCount": 1
     }
   ]

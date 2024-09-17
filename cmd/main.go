@@ -33,9 +33,9 @@ func main() {
 	ctx := helper.BuildHydratedContext(context.Background(), cfg, cacheData)
 
 	if cfg.BackgroundMod {
-		archive.BackgroundRun(ctx, 5*time.Second, cfg.Mailing)
+		archive.BackgroundRun(ctx, 5*time.Second, cfg.RssList)
 	} else {
-		err := archive.Do(ctx, cfg.Mailing)
+		err := archive.Do(ctx, cfg.RssList)
 		if err != nil {
 			_, err := fmt.Fprintf(os.Stderr, "%v\n", err)
 			if err != nil {

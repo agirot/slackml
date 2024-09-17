@@ -15,9 +15,7 @@ import (
 	"time"
 )
 
-const mailArchiveTemplate = "https://www.mail-archive.com/%s/maillist.xml"
-
-func Do(ctx context.Context, mailingList []config.List) error {
+func Do(ctx context.Context, mailingList []config.Rss) error {
 	var lastErr error
 	wg := sync.WaitGroup{}
 	wg.Add(len(mailingList))
@@ -36,16 +34,16 @@ func Do(ctx context.Context, mailingList []config.List) error {
 	return lastErr
 }
 
-func BackgroundRun(ctx context.Context, interval time.Duration, mailingList []config.List) {
+func BackgroundRun(ctx context.Context, interval time.Duration, mailingList []config.Rss) {
 	ticker := time.NewTicker(interval)
 	for range ticker.C {
 		_ = Do(ctx, mailingList)
 	}
 }
 
-func readFeed(ctx context.Context, mailing config.List) error {
+func readFeed(ctx context.Context, mailing config.Rss) error {
 	fp := gofeed.NewParser()
-	feed, err := fp.ParseURL(fmt.Sprintf(mailArchiveTemplate, mailing.ID))
+	feed, err := fp.ParseURL(mailing.ID)
 	if err != nil {
 		return fmt.Errorf("error parsing feed %s: %w", mailing.ID, err)
 	}
@@ -99,7 +97,7 @@ func readFeed(ctx context.Context, mailing config.List) error {
 	return nil
 }
 
-func processItem(ctx context.Context, mailing config.List, item gofeed.Item, filters []string) (bool, error) {
+func processItem(ctx context.Context, mailing config.Rss, item gofeed.Item, filters []string) (bool, error) {
 	if len(filters) > 0 {
 		found := false
 		for _, filter := range filters {

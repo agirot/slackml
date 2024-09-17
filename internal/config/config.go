@@ -7,7 +7,7 @@ import (
 
 type Conf struct {
 	CacheFile      string `default:"cache.json"`
-	Mailing        []List `json:"mailing"`
+	RssList        []Rss  `json:"rss"`
 	SlackChannelID string `required:"true"`
 	SlackToken     string `required:"true"`
 
@@ -15,7 +15,7 @@ type Conf struct {
 	BackgroundMod bool   `default:"false"`
 }
 
-type List struct {
+type Rss struct {
 	ID           string `json:"id"`
 	TitleFilters []string
 	InitCount    float64
