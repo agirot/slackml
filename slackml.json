@@ -1,5 +1,5 @@
 {
-  "mailing": [
+  "rss": [
     {
       "ID": "https://www.mail-archive.com/users@trafficserver.apache.org/maillist.xml",
       "TitleFilters": [

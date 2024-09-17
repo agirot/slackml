@@ -62,7 +62,7 @@ func readFeed(ctx context.Context, mailing config.Rss) error {
 
 	var itemSend int
 	for _, item := range feed.Items {
-		toSend, err := processItem(ctx, mailing, *item, mailing.TitleFilters)
+		toSend, err := processItem(ctx, *item, mailing.TitleFilters)
 		if err != nil {
 			return fmt.Errorf("error processing item %s: %w", item.GUID, err)
 		}
@@ -97,7 +97,7 @@ func readFeed(ctx context.Context, mailing config.Rss) error {
 	return nil
 }
 
-func processItem(ctx context.Context, mailing config.Rss, item gofeed.Item, filters []string) (bool, error) {
+func processItem(ctx context.Context, item gofeed.Item, filters []string) (bool, error) {
 	if len(filters) > 0 {
 		found := false
 		for _, filter := range filters {
