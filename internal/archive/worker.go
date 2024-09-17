@@ -52,7 +52,8 @@ func readFeed(ctx context.Context, mailing config.Rss) error {
 	entry, err := helper.GetCacheContext(ctx).GetLastEntry(ctx, mailing.ID)
 	if err == nil {
 		//Compare cache datetime to feed
-		if feed.PublishedParsed != nil && !feed.PublishedParsed.After(entry.LastFeedUpdated) {
+		lastFeedUpdated := getLastFeedUpdate(feed)
+		if lastFeedUpdated != nil && !lastFeedUpdated.After(entry.LastFeedUpdated) {
 			// No new item to check, return
 			return nil
 		}
@@ -111,4 +112,14 @@ func processItem(ctx context.Context, item gofeed.Item, filters []string) (bool,
 	}
 
 	return true, nil
+}
+
+// getLastFeedUpdate check pubDate or lastBuildDate rss fields
+func getLastFeedUpdate(feed *gofeed.Feed) *time.Time {
+	if feed.PublishedParsed != nil {
+		return feed.PublishedParsed
+	} else if feed.UpdatedParsed != nil {
+		return feed.UpdatedParsed
+	}
+	return nil
 }
