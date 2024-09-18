@@ -26,10 +26,6 @@
     {
       "ID": "https://cilium.io/newsletter/rss.xml",
       "InitCount": 1
-    },
-    {
-      "ID": "https://blog.cloudflare.com/rss",
-      "InitCount": 1
     }
   ]
 }
